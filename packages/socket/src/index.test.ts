@@ -4,7 +4,7 @@ import {
   createSocketService,
   generateCertificate,
   createSocketClient
-} from '../src';
+} from './index';
 
 interface ICalculator {
   multiply: (x1: number, x2: number) => Promise<number>;

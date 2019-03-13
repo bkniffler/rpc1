@@ -1,4 +1,4 @@
-import { createBroker } from '../src';
+import { createBroker } from './index';
 
 interface ICalculator {
   sub: (x1: number, x2: number, cb: (err: any, result: number) => void) => void;

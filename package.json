@@ -55,12 +55,12 @@
     "ts-jest": "^24.0.0",
     "typescript": "^3.1.6"
   },
+  "globalsa": {
+    "ts-jest": {
+      "tsConfig": "./packages/service-proxy/tsconfig.lib.json"
+    }
+  },
   "jest": {
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "./packages/tsconfig.lib.json"
-      }
-    },
     "preset": "ts-jest",
     "collectCoverage": false,
     "collectCoverageFrom": [

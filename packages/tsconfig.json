@@ -8,5 +8,6 @@
       "@service-proxy/socket": ["./socket/src/index.ts"],
       "@service-proxy/socket-client": ["./socket-client/src/index.ts"]
     }
-  }
+  },
+  "exclude": ["**/*.test.ts", "**/*.test.tsx"]
 }
