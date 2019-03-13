@@ -1,6 +1,5 @@
 import * as shortid from 'shortid';
 export { EventEmitter } from 'events';
-import { EventEmitter } from 'events';
 
 // Do function arguments contain a cb function?
 export function isArgsWithCallback(args: any[]) {

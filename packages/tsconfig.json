@@ -3,11 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@service-tunnel/core": ["./core/src/index.ts"],
-      "@service-tunnel/react": ["./react/src/index.ts"],
-      "@service-tunnel/socket": ["./socket/src/index.ts"],
-      "@service-tunnel/socket-client": ["./socket-client/src/index.ts"]
+      "@service-tunnel/*": ["./*/src/index.ts"]
     }
   },
-  "exclude": ["**/*.test.ts", "**/*.test.tsx"]
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "node_modules"]
 }
