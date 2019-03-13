@@ -1,6 +1,6 @@
 {
   "name": "@service-tunnel/socket",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "sideEffects": false,
   "license": "MIT",
   "main": "lib",
@@ -31,8 +31,8 @@
     "url": "https://github.com/bkniffler/service-tunnel.git"
   },
   "devDependencies": {
-    "@service-tunnel/core": "^1.0.0-alpha.1",
-    "@service-tunnel/socket-client": "^1.0.0-alpha.1"
+    "@service-tunnel/core": "^1.0.0-alpha.2",
+    "@service-tunnel/socket-client": "^1.0.0-alpha.2"
   },
   "dependencies": {
     "@types/node-forge": "^0.7.11",
