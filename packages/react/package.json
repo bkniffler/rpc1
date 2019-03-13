@@ -7,6 +7,9 @@
   "esnext": "es",
   "module": "es",
   "types": "lib/index.d.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "rpc",
     "service",
