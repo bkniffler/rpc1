@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IService, log } from '@service-proxy/core';
-import { createSocketClient } from '@service-proxy/socket-client';
+import { IService, log } from '@service-tunnel/core';
+import { createSocketClient } from '@service-tunnel/socket-client';
 
 const context = React.createContext<IService | undefined>(undefined);
 const Provider = context.Provider;

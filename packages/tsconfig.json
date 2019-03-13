@@ -3,10 +3,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@service-proxy/core": ["./core/src/index.ts"],
-      "@service-proxy/react": ["./react/src/index.ts"],
-      "@service-proxy/socket": ["./socket/src/index.ts"],
-      "@service-proxy/socket-client": ["./socket-client/src/index.ts"]
+      "@service-tunnel/core": ["./core/src/index.ts"],
+      "@service-tunnel/react": ["./react/src/index.ts"],
+      "@service-tunnel/socket": ["./socket/src/index.ts"],
+      "@service-tunnel/socket-client": ["./socket-client/src/index.ts"]
     }
   },
   "exclude": ["**/*.test.ts", "**/*.test.tsx"]

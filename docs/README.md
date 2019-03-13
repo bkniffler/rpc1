@@ -7,13 +7,13 @@
 ### Yarn
 
 ```
-yarn add service-proxy
+yarn add service-tunnel
 ```
 
 ### NPM
 
 ```
-npm i service-proxy
+npm i service-tunnel
 ```
 
 ## How to Use

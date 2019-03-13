@@ -1,5 +1,5 @@
 {
-  "name": "@service-proxy/socket-client",
+  "name": "@service-tunnel/socket-client",
   "version": "1.0.0-alpha.1",
   "sideEffects": false,
   "license": "MIT",
@@ -21,14 +21,14 @@
   ],
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "bugs": {
-    "url": "https://github.com/bkniffler/service-proxy"
+    "url": "https://github.com/bkniffler/service-tunnel"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bkniffler/service-proxy.git"
+    "url": "https://github.com/bkniffler/service-tunnel.git"
   },
   "devDependencies": {
-    "@service-proxy/core": "^1.0.0-alpha.1"
+    "@service-tunnel/core": "^1.0.0-alpha.1"
   },
   "dependencies": {
     "@types/socket.io-client": "^1.4.32",

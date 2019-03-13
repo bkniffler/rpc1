@@ -1,5 +1,5 @@
 {
-  "name": "service-proxy-monorepo",
+  "name": "service-tunnel-monorepo",
   "private": true,
   "license": "MIT",
   "keywords": [
@@ -16,11 +16,11 @@
   ],
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "bugs": {
-    "url": "https://github.com/bkniffler/service-proxy"
+    "url": "https://github.com/bkniffler/service-tunnel"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bkniffler/service-proxy.git"
+    "url": "https://github.com/bkniffler/service-tunnel.git"
   },
   "workspaces": [
     "packages/*"
@@ -33,8 +33,8 @@
     "bootstrap": "lerna bootstrap",
     "build": "run-p ts:*",
     "dev": "run-p \"ts:* -- --watch\"",
-    "ts:es": "tsc --build ./packages/service-proxy/tsconfig.es.json",
-    "ts:lib": "tsc --build ./packages/service-proxy/tsconfig.lib.json",
+    "ts:es": "tsc --build ./packages/service-tunnel/tsconfig.es.json",
+    "ts:lib": "tsc --build ./packages/service-tunnel/tsconfig.lib.json",
     "clean": "rm -rf ./packages/*/lib ./packages/*/es",
     "lp": "lerna publish --registry https://registry.npmjs.org",
     "lpf": "lerna publish --registry https://registry.npmjs.org --force-publish",

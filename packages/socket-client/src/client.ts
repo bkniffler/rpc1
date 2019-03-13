@@ -6,7 +6,7 @@ import {
   generate,
   createService,
   IInitializer
-} from '@service-proxy/core';
+} from '@service-tunnel/core';
 import * as socketIOClient from 'socket.io-client';
 const log = createLog('client-socket');
 const defaultPort = 61610;

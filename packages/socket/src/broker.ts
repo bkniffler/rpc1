@@ -1,5 +1,5 @@
 import * as socketIO from 'socket.io';
-import { requestReply, createLog, IBroker } from '@service-proxy/core';
+import { requestReply, createLog, IBroker } from '@service-tunnel/core';
 import { findPort } from './utils';
 import * as https from 'https';
 const log = createLog('broker-socket');

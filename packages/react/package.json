@@ -1,5 +1,5 @@
 {
-  "name": "@service-proxy/react",
+  "name": "@service-tunnel/react",
   "version": "1.0.0-alpha.1",
   "sideEffects": false,
   "license": "MIT",
@@ -21,15 +21,15 @@
   ],
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "bugs": {
-    "url": "https://github.com/bkniffler/service-proxy"
+    "url": "https://github.com/bkniffler/service-tunnel"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bkniffler/service-proxy.git"
+    "url": "https://github.com/bkniffler/service-tunnel.git"
   },
   "devDependencies": {
-    "@service-proxy/core": "^1.0.0-alpha.1",
-    "@service-proxy/socket-client": "^1.0.0-alpha.1",
+    "@service-tunnel/core": "^1.0.0-alpha.1",
+    "@service-tunnel/socket-client": "^1.0.0-alpha.1",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
     "react": "16.8.4",

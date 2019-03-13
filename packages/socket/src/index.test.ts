@@ -1,4 +1,4 @@
-import { createBroker } from '@service-proxy/core';
+import { createBroker } from '@service-tunnel/core';
 import {
   pluginSocketBroker,
   createSocketService,
