@@ -1,4 +1,5 @@
 import * as shortid from 'shortid';
+import { EventEmitter } from 'events';
 export { EventEmitter } from 'events';
 
 // Do function arguments contain a cb function?

@@ -73,6 +73,11 @@ export function useMethod<T>(
   return [state.res as any, state.loading, state.err];
 }
 
+export function useServiceTunnel<T = any>(service: string): T | undefined {
+  const client = React.useContext(context);
+  return client ? client.use(service) : undefined;
+}
+
 export function ServiceProxyProvider({
   render,
   children,
