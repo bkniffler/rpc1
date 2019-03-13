@@ -41,6 +41,5 @@
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
-  },
-  "dependencies": {}
+  }
 }
