@@ -29,7 +29,7 @@
     "up": "yarn upgrade-interactive --latest",
     "docs": "docsify serve docs",
     "netlify": "yarn build && cd example/react && yarn && yarn build",
-    "prepublishOnly": "yarn build && yarn test",
+    "prepublishOnly": "yarn test",
     "bootstrap": "lerna bootstrap",
     "build": "run-p ts:*",
     "dev": "run-p \"ts:* -- --watch\"",

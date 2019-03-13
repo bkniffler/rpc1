@@ -41,5 +41,6 @@
     "find-free-port": "^2.0.0",
     "node-forge": "^0.8.1",
     "socket.io": "^2.2.0"
-  }
+  },
+  "gitHead": "2c6e5b6e973f62a78670407eb8022c9c56dfccc7"
 }
