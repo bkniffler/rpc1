@@ -119,9 +119,14 @@ export const defaultInterval = (tries: number) => {
 };
 
 let logging = false;
+type ILogFunc = (level: 'info' | 'error' | 'warn', ...args: any[]) => void;
+let logFunc: ILogFunc = (level, ...args) => console[level](...args);
+export function overwriteLog(func: ILogFunc) {
+  logFunc = func;
+}
 interface ILog {
   info: (...args: any[]) => void;
-  warning: (...args: any[]) => void;
+  warn: (...args: any[]) => void;
   error: (...args: any[]) => void;
 }
 export const log = {
@@ -133,22 +138,23 @@ export const log = {
   },
   info(...args: any[]) {
     if (!logging) return;
-    console.log(...args);
+    logFunc('info', ...args);
   },
   error(...args: any[]) {
     if (!logging) return;
-    console.error(...args);
+    logFunc('error', ...args);
   },
   warning(...args: any[]) {
     if (!logging) return;
-    console.warn(...args);
+    logFunc('warn', ...args);
   }
 };
 
-let logs = [];
-const colorsjs = require('colors/safe');
+// let logs = [];
+// const colorsjs = require('colors/safe');
+
 export function createLog(name: string): ILog {
-  const colors = [
+  /*const colors = [
     'green',
     'yellow',
     'blue',
@@ -156,17 +162,18 @@ export function createLog(name: string): ILog {
     'cyan',
     'white',
     'gray'
-  ];
+  ];*/
 
   let options = {
-    color: '',
+    // color: '',
     tabs: ''
   };
   return Object.keys(log).reduce(
     (state: any, key: string) => ({
       ...state,
       [key]: (...args: any[]) => {
-        if (!options.color) {
+        return log[key](options.tabs + name, ...args);
+        /*if (!options.color) {
           options.color = colors[logs.length % colors.length];
           options.tabs = Array(logs.length)
             .fill(0)
@@ -174,6 +181,7 @@ export function createLog(name: string): ILog {
           logs.push(null);
         }
         return log[key](options.tabs + colorsjs[options.color](name), ...args);
+        */
       }
     }),
     {}
