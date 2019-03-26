@@ -54,6 +54,60 @@ test(
 );
 
 test(
+  'socket:eventemitter:max',
+  async d => {
+    let hasResult = false;
+    const done = async () => {
+      clearTimeout(timeout);
+      calc();
+      await destroy();
+      expect(hasResult).toBe(true);
+      d();
+    };
+    const timeout = setTimeout(done, maxTimeout);
+    const destroy = createBroker(broker => {
+      broker.plugin(
+        pluginSocketBroker({
+          port
+        })
+      );
+    });
+    const calc = createSocketService(
+      'calculator',
+      `http://localhost:${port}`,
+      service => {
+        service.addSubscription('sub1', emit => {
+          const interval = setInterval(() => emit('hi'), 100);
+          return () => clearInterval(interval);
+        });
+      }
+    );
+    let max = 30;
+    const create = () =>
+      new Promise(yay => {
+        const destroyClient = createSocketClient(
+          `http://localhost:${port}`,
+          async service => {
+            const calculator = service.use<ICalculator>('calculator');
+            try {
+              calculator['sub1'];
+              hasResult = true;
+            } catch (err) {
+              expect({}).toBeNull();
+            }
+            destroyClient();
+            yay();
+          }
+        );
+      });
+    while (max > 0) {
+      await create();
+    }
+  },
+  maxTimeout + 1000
+);
+
+test(
   'socket:method:identity',
   d => {
     let hasResult = false;

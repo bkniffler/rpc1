@@ -1,7 +1,11 @@
 import { createBroker } from './index';
 
 interface ICalculator {
-  sub: (x1: number, x2: number, cb: (err: any, result: number) => void) => void;
+  sub: (
+    x1: number,
+    x2: number,
+    cb: (err: any, result: number) => void
+  ) => () => void;
   multiply: (x1: number, x2: number) => Promise<number>;
 }
 
@@ -38,6 +42,46 @@ test('method', () => {
   });
 }, 15000);
 
+test('subscription', () => {
+  return new Promise(yay => {
+    let calls = 0;
+    let destroyArr: any[] = [];
+    const done = async () => {
+      console.log('CALLS', calls);
+      await Promise.all(destroyArr.map(x => x()));
+      expect(calls).toBe(3);
+      yay();
+    };
+    destroyArr.push(
+      createBroker(broker => {
+        destroyArr.push(
+          broker.local('calculator', service => {
+            service.addSubscription('sub', (emit, x1: number, x2: number) => {
+              const interval = setInterval(() => {
+                emit(null, x1 * x2);
+              }, 1000);
+              return () => {
+                return clearInterval(interval);
+              };
+            });
+          })
+        );
+        destroyArr.push(
+          broker.client(client => {
+            const service = client.use<ICalculator>('calculator');
+            const unsub = service.sub(1, 2, (err, res) => {
+              calls += 1;
+              expect(res).toBe(2);
+              expect(err).toBeNull();
+            });
+            setTimeout(unsub, 3500);
+            setTimeout(done, 4000);
+          })
+        );
+      })
+    );
+  });
+}, 5000);
 /*test('method:err', () => {
   return new Promise(yay => {
     let disco = false;
