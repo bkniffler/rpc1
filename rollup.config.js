@@ -77,7 +77,7 @@ const projects = Object.keys(paths).forEach(key => {
     output: [{ file: join(lib, 'index.cjs.js'), format: 'cjs' }],
     plugins: [
       json(),
-      resolve({ module: true, jail: lib }),
+      resolve({ jail: lib }),
       autoExternal({
         packagePath: join(lib, 'package.json')
       })

@@ -1,10 +1,6 @@
 import { createBroker } from 'rpc1';
-import {
-  pluginSocketBroker,
-  createSocketService,
-  generateCertificate,
-  createSocket
-} from './index';
+import { pluginSocketBroker, generateCertificate } from './index';
+import { createSocketService, createSocket } from 'rpc1-socket';
 
 interface ICalculator {
   multiply: (x1: number, x2: number) => Promise<number>;
