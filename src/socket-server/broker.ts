@@ -1,7 +1,10 @@
-import * as socketIO from 'socket.io';
-import { requestReply, createLog, IBroker } from '@service-tunnel/core';
+import { requestReply, createLog, IBroker } from 'rpc1';
 import { findPort } from './utils';
 import * as https from 'https';
+import { Server, Socket } from 'socket.io';
+//@ts-ignore
+import * as _socketIO from 'socket.io';
+const socketIO = _socketIO;
 const log = createLog('broker-socket');
 
 const defaultPort = 61610;
@@ -69,15 +72,12 @@ export function pluginSocketBroker(options: IOptions = {}) {
   };
 }
 
-interface IServer extends socketIO.Server {
+interface IServer extends Server {
   port: number;
   closeServer?: (cb: () => void) => void;
 }
 
-function serverSocket(
-  options: IOptions,
-  channels?: (socket: socketIO.Socket) => void
-) {
+function serverSocket(options: IOptions, channels?: (socket: Socket) => void) {
   let port = options.port || defaultPort;
   return new Promise<IServer>(async (yay, nay) => {
     if (!port) {

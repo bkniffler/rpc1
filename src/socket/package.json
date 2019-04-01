@@ -1,0 +1,13 @@
+{
+  "name": "rpc1-socket",
+  "main": "index.ts",
+  "version": "1.0.0",
+  "devDependencies": {
+    "rpc1": "^1.0.0"
+  },
+  "dependencies": {
+    "@types/socket.io-client": "^1.4.32",
+    "socket.io-client": "^2.2.0",
+    "tslib": "^1.9.3"
+  }
+}

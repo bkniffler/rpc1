@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IService, log } from '@service-tunnel/core';
-import { createSocketClient } from '@service-tunnel/socket-client';
+import { IService, log } from 'rpc1';
+import { createSocket } from 'rpc1-socket';
 
 const context = React.createContext<IService | undefined>(undefined);
 const Provider = context.Provider;
@@ -101,8 +101,8 @@ export function ServiceProxyProvider({
     url = url ? [url].filter(x => x) : [];
   }
   React.useEffect(() => {
-    const destroy = createSocketClient(url[0], client => {
-      console.log(client);
+    const destroy = createSocket(url[0], client => {
+      // console.log(client);
       setState(client);
     });
     return () => {

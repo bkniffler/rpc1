@@ -1,0 +1,19 @@
+{
+  "name": "rpc1-socket-server",
+  "main": "index.ts",
+  "browser": false,
+  "version": "1.0.0",
+  "devDependencies": {
+    "rpc1": "^1.0.0",
+    "rpc1-socket": "^1.0.0"
+  },
+  "dependencies": {
+    "@types/node-forge": "^0.7.11",
+    "@types/socket.io": "^2.1.2",
+    "events": "^3.0.0",
+    "find-free-port": "^2.0.0",
+    "node-forge": "^0.8.1",
+    "socket.io": "^2.2.0",
+    "tslib": "^1.9.3"
+  }
+}

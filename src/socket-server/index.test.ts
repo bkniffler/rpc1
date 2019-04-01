@@ -1,9 +1,9 @@
-import { createBroker } from '@service-tunnel/core';
+import { createBroker } from 'rpc1';
 import {
   pluginSocketBroker,
   createSocketService,
   generateCertificate,
-  createSocketClient
+  createSocket
 } from './index';
 
 interface ICalculator {
@@ -32,7 +32,7 @@ test(
       );
     });
     const services = [
-      createSocketClient(`http://localhost:${port}`, async service => {
+      createSocket(`http://localhost:${port}`, async service => {
         const calculator = service.use<ICalculator>('calculator');
         try {
           const result = await calculator.multiply(2, 3);
@@ -85,7 +85,7 @@ test(
     let max = 30;
     const create = () =>
       new Promise(yay => {
-        const destroyClient = createSocketClient(
+        const destroyClient = createSocket(
           `http://localhost:${port}`,
           async service => {
             const calculator = service.use<ICalculator>('calculator');
@@ -130,7 +130,7 @@ test(
       );
     });
     const services = [
-      createSocketClient(
+      createSocket(
         `http://localhost:${port}`,
         async service => {
           const calculator = service.use<ICalculator>('calculator');
@@ -147,7 +147,7 @@ test(
           verifyBrokerIdentity: (identity: any) => identity.name === 'broker123'
         }
       ),
-      createSocketClient(
+      createSocket(
         `http://localhost:${port}`,
         async service => {
           const calculator = service.use<ICalculator>('calculator');
@@ -203,7 +203,7 @@ test(
       );
     });
     const services = [
-      createSocketClient(`https://localhost:${port}`, async service => {
+      createSocket(`https://localhost:${port}`, async service => {
         const calculator = service.use<ICalculator>('calculator');
         try {
           const result = await calculator.multiply(2, 3);

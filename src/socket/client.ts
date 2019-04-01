@@ -6,7 +6,7 @@ import {
   generate,
   createService,
   IInitializer
-} from '@service-tunnel/core';
+} from 'rpc1';
 import * as socketIOClient from 'socket.io-client';
 const log = createLog('client-socket');
 const defaultPort = 61610;
@@ -17,7 +17,7 @@ interface IOptions {
   handleError?: (error: any) => Promise<any> | any;
 }
 
-export function createSocketClient(
+export function createSocket(
   hostName: string,
   initializer: IInitializer,
   options: IOptions = {}

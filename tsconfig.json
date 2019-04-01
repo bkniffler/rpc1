@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "declaration": true,
     "noImplicitAny": true,
     "removeComments": true,
@@ -16,8 +16,19 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "composite": true,
     "declarationMap": true,
-    "sourceMap": true
-  }
+    "sourceMap": true,
+    "importHelpers": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.cache/typescript",
+    "baseUrl": "./",
+    "paths": {
+      "rpc1": ["./src/core"],
+      "rpc1-react": ["./src/react"],
+      "rpc1-socket": ["./src/socket"],
+      "rpc1-socket-server": ["./src/socket-server"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "lib"]
 }

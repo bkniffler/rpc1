@@ -1,3 +1,3 @@
-export * from '@service-tunnel/socket-client';
+export * from 'rpc1-socket';
 export * from './broker';
 export * from './certificate';
