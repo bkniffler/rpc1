@@ -102,7 +102,6 @@ export function ServiceProxyProvider({
   }
   React.useEffect(() => {
     const destroy = createSocket(url[0], client => {
-      // console.log(client);
       setState(client);
     });
     return () => {

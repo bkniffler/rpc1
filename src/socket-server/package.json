@@ -8,7 +8,7 @@
     "rpc1-socket": "^1.0.0"
   },
   "dependencies": {
-    "@types/node-forge": "^0.7.11",
+    "@types/node-forge": "^0.8.2",
     "@types/socket.io": "^2.1.2",
     "events": "^3.0.0",
     "find-free-port": "^2.0.0",

@@ -1,4 +1,4 @@
-import { generate, EventEmitter } from './common';
+import { generate, IEmitter } from './utils';
 
 export interface IIdStorage {
   add: (id: string) => Promise<void> | void;
@@ -22,9 +22,9 @@ export function createDefaultIDStorage() {
 
 export interface IServiceStorage {
   remove: (type: string, id: string) => void;
-  add: (type: string, emitter: EventEmitter) => string;
-  get: (type: string, id?: string) => EventEmitter | undefined;
-  map: (mapper: (emitter: EventEmitter) => void) => void;
+  add: (type: string, emitter: IEmitter) => string;
+  get: (type: string, id?: string) => IEmitter | undefined;
+  map: (mapper: (emitter: IEmitter) => void) => void;
   count: () => number;
 }
 

@@ -1,4 +1,4 @@
-import { requestReply, createLog, IBroker } from 'rpc1';
+import { requestReply, createLog, Broker, IEmitter } from 'rpc1';
 import { findPort } from './utils';
 import * as https from 'https';
 import { Server, Socket } from 'socket.io';
@@ -10,7 +10,7 @@ const log = createLog('broker-socket');
 const defaultPort = 61610;
 
 interface IOptions {
-  ssl?: [string, string];
+  certficate?: [string, string];
   port?: number;
   check?: number;
   verifyClientIdentity?: (identity: any) => Promise<boolean> | boolean;
@@ -22,12 +22,12 @@ interface IIdentity {
   type: string;
 }
 export function pluginSocketBroker(options: IOptions = {}) {
-  return function(broker: IBroker) {
+  return function(broker: Broker) {
     log.info('Adding socket plugin to broker');
     let server = serverSocket(options as IOptions, async socket => {
       log.info('New socket, trying identification...');
       const identity = await requestReply<[IIdentity]>(
-        socket,
+        (socket as any) as IEmitter,
         ['identify', 'identify'],
         options.getIdentity ? await options.getIdentity() : {}
       )
@@ -49,7 +49,10 @@ export function pluginSocketBroker(options: IOptions = {}) {
         return;
       }
       log.info(`Successfully identified and verified ${identity.type}`);
-      socket.once('disconnect', broker.connect(identity.type, socket));
+      socket.once(
+        'disconnect',
+        broker.connect(identity.type, (socket as any) as IEmitter)
+      );
       socket.emit('accepted');
     });
     return () => {
@@ -89,10 +92,10 @@ function serverSocket(options: IOptions, channels?: (socket: Socket) => void) {
     }
 
     let io: IServer;
-    if (options.ssl) {
+    if (options.certficate) {
       const server = https.createServer({
-        key: options.ssl[0],
-        cert: options.ssl[1]
+        key: options.certficate[0],
+        cert: options.certficate[1]
       });
       io = socketIO(server) as IServer;
       server.listen(port);
@@ -102,10 +105,10 @@ function serverSocket(options: IOptions, channels?: (socket: Socket) => void) {
           server.emit('close');
         });
       };
-      log.info(`Listening to port ${port} with SSL`);
+      log.info(`Listening to port ${port} with HTTPS`);
     } else {
       io = socketIO.listen(port, {}) as IServer;
-      log.info(`Listening to port ${port}, no SSL`);
+      log.info(`Listening to port ${port}, no HTTPS`);
     }
 
     io.on('connection', function(socket) {

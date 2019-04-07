@@ -1,14 +1,4 @@
-import { createBroker } from 'rpc1';
-import { pluginSocketBroker, generateCertificate } from './index';
-import { createSocketService, createSocket } from 'rpc1-socket';
-
-interface ICalculator {
-  multiply: (x1: number, x2: number) => Promise<number>;
-}
-
-const port = 9991;
-const maxTimeout = 10000;
-test(
+/*test(
   'socket:method:basic',
   d => {
     let hasResult = false;
@@ -42,6 +32,105 @@ test(
       createSocketService('calculator', `http://localhost:${port}`, service => {
         service.addMethod<number>('multiply', (x1: number, x2: number) => {
           return x1 * x2;
+        });
+      })
+    ];
+  },
+  maxTimeout + 1000
+);
+
+const makeServer = (
+  port: number,
+  name: string,
+  init: (service: IService) => void
+) => {
+  const destroy = createBroker(broker => {
+    broker.plugin(
+      pluginSocketBroker({
+        port
+      })
+    );
+    broker.local(name, init);
+  });
+  return destroy;
+};*/
+
+// log.enable();
+/* test(
+  'socket:method:reconnect',
+  async d => {
+    // Broker
+    const broker = new Broker([pluginSocketBroker({ port: port + 1 })]);
+    // Service
+    const service = new Service('calculator', new LocalConnector(broker));
+    service.addMethod<number>('multiply', (x1: number, x2: number) => {
+      return x1 * x2;
+    });
+    const client = new ServiceClient(new LocalConnector(broker));
+    /// Client
+    const client = new ServiceClient(
+      new SocketConnector(`http://localhost:${port + 1}`),
+      { timeout: 1000 }
+    );/
+    const calc = client.use<ICalculator>('calculator');
+    console.log('Client up');
+    expect(await calc.multiply(5, 5)).toBe(25);
+    d();
+    client.on('connect', () => console.log('CONNECTED'));
+    client.on('disconnect', () => console.log('DISCONNECTED'));
+    client.on('timeout', () => console.log('TIMEOUT'));
+    const calc = client.use<ICalculator>('calculator');
+    console.log('Client up');
+    let result = await calc.multiply(5, 5);
+    console.log(result);
+    destroy();
+    await new Promise(yay => setTimeout(yay, 1000));
+    result = await calc
+      .multiply(6, 6)
+      .catch(err => (console.log('Timeout') as any) || 'Timeout');
+    console.log(result);
+    await new Promise(yay => setTimeout(yay, 1000));
+    d();*
+  },
+  maxTimeout + 30000
+);
+*/
+/*test(
+  'socket:method:error',
+  d => {
+    let hasResult = false;
+    let hasErr = false;
+    const done = async () => {
+      clearTimeout(timeout);
+      services.forEach(x => x());
+      await destroy();
+      expect(hasResult).toBe(false);
+      expect(hasErr).toBe(true);
+      d();
+    };
+    const timeout = setTimeout(done, maxTimeout);
+    const destroy = createBroker(broker => {
+      broker.plugin(
+        pluginSocketBroker({
+          port
+        })
+      );
+    });
+    const services = [
+      createSocket(`http://localhost:${port}`, async service => {
+        const calculator = service.use<ICalculator>('calculator');
+        try {
+          await calculator.multiply(2, 3);
+          hasResult = true;
+        } catch (err) {
+          expect(err).toBeTruthy();
+          hasErr = true;
+        }
+        done();
+      }),
+      createSocketService('calculator', `http://localhost:${port}`, service => {
+        service.addMethod<number>('multiply', (x1: number, x2: number) => {
+          throw new Error('Heyda');
         });
       })
     ];
@@ -194,7 +283,7 @@ test(
       broker.plugin(
         pluginSocketBroker({
           port,
-          ssl: [privateKey, cert]
+          certficate: [privateKey, cert]
         })
       );
     });

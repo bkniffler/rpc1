@@ -3,12 +3,12 @@
   "main": "index.ts",
   "version": "1.0.0",
   "devDependencies": {
-    "rpc1": "^1.0.0",
-    "rpc1-socket": "^1.0.0",
-    "@types/react": "^16.8.8",
+    "@types/react": "^16.8.12",
     "@types/react-dom": "^16.8.2",
-    "react": "16.8.4",
-    "react-test-renderer": "16.8.4"
+    "react": "16.8.6",
+    "react-test-renderer": "16.8.6",
+    "rpc1": "^1.0.0",
+    "rpc1-socket": "^1.0.0"
   },
   "peerDependencies": {
     "react": "*",
