@@ -30,22 +30,31 @@ export class Service {
   }
   methods = {};
   subscriptions = {};
+  onConnectState?: (state: boolean) => void = undefined;
   connectToEmitter(emitter: IEmitter) {
     this.emitter = emitter;
     bindMethods(emitter, this.methods);
     bindSubscriptions(emitter, this.subscriptions);
+    if (this.onConnectState) {
+      this.onConnectState(true);
+    }
   }
   brokerTimeout() {
     if (this.adapter) {
       this.adapter.disconnect();
     }
-    this.emitter = undefined;
+    this.disconnectFromEmitter();
   }
   disconnectFromEmitter() {
     this.emitter = undefined;
+    if (this.onConnectState) {
+      this.onConnectState(false);
+    }
   }
   close() {
-    this.adapter.close();
+    if (this.adapter) {
+      this.adapter.close();
+    }
     this.disconnectFromEmitter();
   }
   addSubscription<T = any>(

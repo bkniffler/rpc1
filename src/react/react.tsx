@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { IService, log } from 'rpc1';
-import { createSocket } from 'rpc1-socket';
+import { log, Service } from 'rpc1';
+import { SocketAdapter } from 'rpc1-socket';
 
-const context = React.createContext<IService | undefined>(undefined);
+const context = React.createContext<Service | undefined>(undefined);
 const Provider = context.Provider;
 
 export function useSubscription<T>(
@@ -27,13 +27,9 @@ export function useSubscription<T>(
     }
     const proxy = client.use(service);
 
-    return proxy.subscription(
-      method,
-      ...args,
-      (err: any, res: T | undefined) => {
-        setState({ res: (res || undefined) as any, loading: false, err });
-      }
-    );
+    return proxy[method](...args, (err: any, res: T | undefined) => {
+      setState({ res: (res || undefined) as any, loading: false, err });
+    });
   }, [client, method, JSON.stringify(args)]);
   return [state.res as any, state.loading, state.err];
 }
@@ -59,8 +55,7 @@ export function useMethod<T>(
       return;
     }
     const proxy = client.use(service);
-    proxy
-      .method(method, ...args)
+    proxy[method](...args)
       .then((res: any) =>
         setState({
           res: (res || undefined) as any,
@@ -101,12 +96,11 @@ export function ServiceProxyProvider({
     url = url ? [url].filter(x => x) : [];
   }
   React.useEffect(() => {
-    const destroy = createSocket(url[0], client => {
-      setState(client);
-    });
+    const service = new Service(new SocketAdapter(url[0]));
+    service.onConnectState = con => setState(con ? service : undefined);
     return () => {
       setState(undefined);
-      destroy();
+      service.close();
     };
   }, [url.join(','), authKey]);
   /*let child = null;
